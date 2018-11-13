@@ -100,8 +100,8 @@ int partition(int* toSort, int left, int right) {
 }
 
 int partitionOfThree(int* toSort, int left, int right) {
-	int pivotIndex = medianOfThree(toSort, left, right, (int)(left + right) / 2);
-	int pivot = toSort[pivotIndex];
+	medianOfThree(toSort, left, right, (int)((left + right) / 2));
+	int pivot = toSort[right];
 	int i = left - 1;
 	for (int j = left; j < right; j++) {
 		if (toSort[j] <= pivot) {
@@ -113,30 +113,10 @@ int partitionOfThree(int* toSort, int left, int right) {
 	return i + 1;
 }
 
-int medianOfThree(int* toSort, int a, int b, int c) {
-	if (toSort[a] > toSort[b]) {
-		if (toSort[b] > toSort[c]) {
-			return b;
-		}
-		else if (toSort[a] > toSort[c]) {
-			return c;
-		}
-		else {
-			return a;
-		}
-	}
-	else {
-		if (toSort[a] > toSort[c]) {
-			return a;
-		}
-		else if (toSort[b] > toSort[c]) {
-			return c;
-		}
-		else {
-			return b;
-		}
-	}
-
+void medianOfThree(int* toSort, int l, int r, int m) {
+	if (toSort[l] > toSort[m]) swap(&toSort[l], &toSort[m]);
+	if (toSort[l] > toSort[r]) swap(&toSort[l], &toSort[r]);
+	if (toSort[m] < toSort[r]) swap(&toSort[m], &toSort[r]);
 }
 
 void swap(int* a, int* b) {
